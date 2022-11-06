@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "949336044673",
+    "project_id": "garden-center-mobile",
+    "storage_bucket": "garden-center-mobile.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:949336044673:android:93e973fb0dad82c11dc980",
+        "android_client_info": {
+          "package_name": "com.garden_center"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "949336044673-g9ipm0tn25l521l0rvkhggq2pmtksd23.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.garden_center",
+            "certificate_hash": "33cbc78a8d79c24cb185e027a046f9f575406dca"
+          }
+        },
+        {
+          "client_id": "949336044673-6mgcup5vjs4h32ptrv7t2tnv1mom847f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVF76ft-qPfgnCZyMi2p_UICdUdkQrReM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "949336044673-6mgcup5vjs4h32ptrv7t2tnv1mom847f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
