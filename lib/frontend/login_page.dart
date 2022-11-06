@@ -44,7 +44,7 @@ class _LoginPageState extends State<LoginPage> {
                 "Siram dan Pupuk\nTanamanmu Tepat Waktu",
                 "Kami akan membantu mengingatkan waktu penyiraman, pemupukan, pemberian obat"),
             pageView("assets/intro/memanen.jpeg", "Menanam Sayuran Sekarang!",
-                "Capai kebahagian dengan menanam sayuran sendiri"),
+                "Capai kebahagiaan dengan menanam sayuran sendiri"),
           ],
         ),
         currentPage != numPages - 1

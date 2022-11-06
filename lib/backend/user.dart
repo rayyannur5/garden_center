@@ -8,7 +8,7 @@ class User {
     return _firestore.collection('users').doc(id).snapshots();
   }
 
-  update([String name = "fgngx", String bio = "", String profilePhoto = ""]) {
+  update([String name = "", String bio = "", String profilePhoto = ""]) {
     _firestore
         .collection('users')
         .doc(AuthService().user.uid)

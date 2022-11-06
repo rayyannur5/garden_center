@@ -17,7 +17,7 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.green.shade800,
+      backgroundColor: Colors.transparent,
       body: ClipRRect(
         borderRadius: BorderRadius.only(
             bottomLeft: Radius.circular(40), bottomRight: Radius.circular(40)),
@@ -47,7 +47,12 @@ class ProfilePage extends StatelessWidget {
             return info(context, my_data['name'], my_data['email'],
                 my_data['bio'], my_data['profilePhoto'], size);
           } else {
-            return Text("Loading");
+            return Container(
+              margin: EdgeInsets.only(top: 35),
+              height: size.height / 5,
+              width: size.width,
+              child: Center(child: CircularProgressIndicator()),
+            );
           }
         },
       ),
@@ -157,11 +162,12 @@ class ProfilePage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         SizedBox(
-                            child: Button(
-                                text: Text('Edit Profil'),
-                                color: Colors.green.shade700,
-                                onPressed: () => DialogCard()
-                                    .call(context, updateData(context)))),
+                          child: Button(
+                              text: Text('Edit Profil'),
+                              color: Colors.green.shade700,
+                              onPressed: () => DialogCard()
+                                  .call(context, updateData(context))),
+                        ),
                         Button(
                             text: Text("Logout"),
                             color: Colors.red,

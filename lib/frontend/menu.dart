@@ -14,13 +14,27 @@ class Menu extends StatefulWidget {
 
 class _MenuState extends State<Menu> {
   int _index = 0;
-
-  List _page = [HomePage(), PlantPage(), ArticlePage(), ProfilePage("a")];
+  PageController pageController = PageController(initialPage: 0);
+  List<Widget> _page = [
+    HomePage(),
+    PlantPage(),
+    ArticlePage(),
+    ProfilePage("a")
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _page[_index],
+      backgroundColor: Colors.green.shade800,
+      body: PageView(
+        controller: pageController,
+        onPageChanged: (index) {
+          setState(() {
+            _index = index;
+          });
+        },
+        children: _page,
+      ),
       bottomNavigationBar: Material(
         color: Colors.green.shade800,
         child: Container(
@@ -36,9 +50,8 @@ class _MenuState extends State<Menu> {
               gap: 8, // the tab button gap between icon and text
               selectedIndex: _index,
               onTabChange: (index) {
-                setState(() {
-                  _index = index;
-                });
+                pageController.animateToPage(index,
+                    duration: Duration(milliseconds: 300), curve: Curves.ease);
               },
               tabs: [
                 GButton(
