@@ -24,7 +24,6 @@ class PlantPage extends StatelessWidget {
             children: [
               ListView(
                 // crossAxisAlignment: CrossAxisAlignment.start,
-
                 children: [
                   SizedBox(height: size.height / 6),
                   tanaman(

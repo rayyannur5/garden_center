@@ -123,7 +123,7 @@ class ProfilePage extends StatelessWidget {
         children: [
           Container(
             margin: EdgeInsets.only(top: 10, left: 50),
-            height: size.height / 5,
+            height: size.height / 4,
             width: size.width,
             child: Card(
               elevation: 10,
