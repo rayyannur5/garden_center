@@ -11,6 +11,7 @@ class HomePage extends StatelessWidget {
         borderRadius: BorderRadius.only(
             bottomLeft: Radius.circular(40), bottomRight: Radius.circular(40)),
         child: Container(
+          child: Text("home"),
           color: Color.fromARGB(255, 245, 247, 254),
         ),
       ),
