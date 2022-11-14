@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:garden_center/frontend/widgets/style.dart';
 
 class InfoPlant extends StatelessWidget {
   final String title;
   final String desc;
   final String img;
-  const InfoPlant(
-      {super.key, required this.title, required this.desc, required this.img});
+  const InfoPlant({super.key, required this.title, required this.desc, required this.img});
 
   @override
   Widget build(BuildContext context) {
@@ -42,17 +42,15 @@ class InfoPlant extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle, 
-                      color: Colors.white
-                    ),
+                    decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.white),
                     height: 40,
                     width: 40,
                     child: IconButton(
-                        onPressed: () => Navigator.pop(context), 
+                        onPressed: () => Navigator.pop(context),
                         icon: Icon(
-                          Icons.navigate_before, 
-                          color: Colors.black,)),
+                          Icons.navigate_before,
+                          color: Colors.black,
+                        )),
                   ),
                   SizedBox(
                     height: 40,
@@ -87,10 +85,7 @@ class InfoPlant extends StatelessWidget {
                   padding: EdgeInsets.fromLTRB(33, 10, 0, 10),
                   child: Text(
                     title,
-                    style: TextStyle(
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: "Poppins"),
+                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold, fontFamily: "Poppins"),
                   ),
                   decoration: BoxDecoration(color: Colors.white),
                 ),
@@ -111,7 +106,7 @@ class InfoPlant extends StatelessWidget {
                 child: Text(
                   "Jagung (Zea mays ssp. mays) adalah salah satu tanaman pangan penghasil karbohidrat yang terpenting di dunia, selain gandum dan padi. Bagi penduduk Amerika Tengah dan Selatan, bulir jagung adalah pangan pokok, sebagaimana bagi sebagian penduduk Afrika dan beberapa daerah di Indonesia. Pada masa kini, jagung juga sudah menjadi komponen penting pakan ternak. Penggunaan lainnya adalah sebagai sumber minyak pangan dan bahan dasar tepung maizena. Berbagai produk turunan hasil jagung menjadi bahan baku berbagai produk industri farmasi, kosmetika, dan kimia.",
                   textAlign: TextAlign.justify,
-                  style: TextStyle(fontFamily: "Poppins"),
+                  style: AppStyle.paragraph,
                 ),
               ),
             ),
@@ -120,10 +115,7 @@ class InfoPlant extends StatelessWidget {
                 padding: EdgeInsets.fromLTRB(33, 10, 33, 0),
                 child: Text(
                   "Tips & Tricks",
-                  style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: "Poppins"),
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, fontFamily: "Poppins"),
                 ),
               ),
             ),

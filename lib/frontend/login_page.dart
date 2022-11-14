@@ -12,8 +12,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  var titleStyle = TextStyle(
-      fontFamily: 'Poppins', fontWeight: FontWeight.w900, fontSize: 25);
+  var titleStyle = TextStyle(fontFamily: 'Poppins', fontWeight: FontWeight.w900, fontSize: 25);
   var subtitleStyle = TextStyle(fontFamily: 'Poppins', fontSize: 15);
   final int numPages = 4;
   final PageController pageController = PageController(initialPage: 0);
@@ -33,15 +32,11 @@ class _LoginPageState extends State<LoginPage> {
             });
           },
           children: [
-            pageView(
-                "assets/intro/background.png",
-                "Selamat Datang\ndi Garden Center",
+            pageView("assets/intro/background.png", "Selamat Datang\ndi Garden Center",
                 "kami memberikan kemudahan untuk anda\nyang ingin mulai bercocok tanam sayuran"),
             pageView("assets/intro/menanam.jpeg", "Mulailah Menanam\ndari Nol",
                 "tidak usah risau, kami akan membantumu dari awal hingga akhir, dari membuat benih hingga panen"),
-            pageView(
-                "assets/intro/menyiram.webp",
-                "Siram dan Pupuk\nTanamanmu Tepat Waktu",
+            pageView("assets/intro/menyiram.webp", "Siram dan Pupuk\nTanamanmu Tepat Waktu",
                 "Kami akan membantu mengingatkan waktu penyiraman, pemupukan, pemberian obat"),
             pageView("assets/intro/memanen.jpeg", "Menanam Sayuran Sekarang!",
                 "Capai kebahagiaan dengan menanam sayuran sendiri"),
@@ -57,9 +52,7 @@ class _LoginPageState extends State<LoginPage> {
                     TextButton(
                         onPressed: () {
                           setState(() {
-                            pageController.animateToPage(3,
-                                duration: Duration(milliseconds: 500),
-                                curve: Curves.ease);
+                            pageController.animateToPage(3, duration: Duration(milliseconds: 500), curve: Curves.ease);
                           });
                         },
                         child: Text('Skip', style: subtitleStyle)),
@@ -68,7 +61,7 @@ class _LoginPageState extends State<LoginPage> {
                       children: _buildPageIndicator(),
                     ),
                     Button(
-                        text: Text('Next', style: subtitleStyle),
+                        child: Text('Next', style: subtitleStyle),
                         color: Colors.green,
                         onPressed: () {
                           pageController.nextPage(
@@ -84,7 +77,7 @@ class _LoginPageState extends State<LoginPage> {
                 margin: EdgeInsets.all(20),
                 child: Button(
                     color: Colors.red,
-                    text: Text('Masuk dengan Google'),
+                    child: Text('Masuk dengan Google'),
                     onPressed: () {
                       AuthService().signInWithGoogle();
                     }),
