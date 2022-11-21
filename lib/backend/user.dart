@@ -9,11 +9,7 @@ class User {
   }
 
   update([String name = "", String bio = "", String profilePhoto = ""]) {
-    _firestore
-        .collection('users')
-        .doc(AuthService().user.uid)
-        .get()
-        .then((value) {
+    _firestore.collection('users').doc(AuthService().user.uid).get().then((value) {
       var data = value.data();
 
       if (name == "") name = data!['name'];

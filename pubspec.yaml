@@ -44,6 +44,10 @@ dependencies:
   statusbarz: ^1.0.12
   flutter_switch: ^0.3.2
   shared_preferences: ^2.0.15
+  intl: ^0.17.0
+  image_picker: ^0.8.6
+  firebase_storage: ^10.3.11
+  path: ^1.8.2
 
 dev_dependencies:
   flutter_test:

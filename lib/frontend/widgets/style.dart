@@ -19,9 +19,13 @@ class AppStyle {
   static TextStyle paragraph2Light = const TextStyle(fontFamily: 'Poppins', color: Colors.white, fontSize: 16);
   static TextStyle heading1 =
       const TextStyle(fontFamily: 'Poppins', fontSize: 20, color: Colors.black, fontWeight: FontWeight.w800);
+  static TextStyle heading1grey =
+      const TextStyle(fontFamily: 'Poppins', fontSize: 20, color: Colors.grey, fontWeight: FontWeight.w800);
   static TextStyle heading1Light =
       const TextStyle(fontFamily: 'Poppins', color: Colors.white, fontSize: 20, fontWeight: FontWeight.w900);
   static TextStyle heading3 = const TextStyle(fontFamily: 'Poppins', fontSize: 13, fontWeight: FontWeight.w800);
+  static TextStyle heading3grey =
+      const TextStyle(fontFamily: 'Poppins', fontSize: 13, color: Colors.grey, fontWeight: FontWeight.w800);
   static TextStyle heading3Light =
       const TextStyle(fontFamily: 'Poppins', color: Colors.white, fontSize: 13, fontWeight: FontWeight.w900);
   static TextStyle heading2thin = const TextStyle(fontFamily: 'Poppins', fontSize: 15);

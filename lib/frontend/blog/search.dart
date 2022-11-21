@@ -1,23 +1,24 @@
 import 'dart:ui';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:garden_center/backend/article.dart';
-import 'package:garden_center/backend/auth_service.dart';
-import 'package:garden_center/backend/user.dart';
 import 'package:garden_center/frontend/widgets/navigator.dart';
 import 'package:garden_center/frontend/widgets/post.dart';
 import 'package:garden_center/frontend/widgets/style.dart';
-import 'package:statusbarz/statusbarz.dart';
 
-class MyPost extends StatelessWidget {
-  MyPost({super.key}) {
-    Statusbarz.instance.refresh();
-  }
+class SearchPage extends StatefulWidget {
+  const SearchPage({super.key});
 
+  @override
+  State<SearchPage> createState() => _SearchPageState();
+}
+
+class _SearchPageState extends State<SearchPage> {
+  TextEditingController input = new TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBodyBehindAppBar: true,
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.white.withAlpha(200),
@@ -30,6 +31,7 @@ class MyPost extends StatelessWidget {
           ),
         ),
         elevation: 0,
+        toolbarHeight: 100,
         title: Row(
           children: [
             SizedBox(
@@ -48,33 +50,40 @@ class MyPost extends StatelessWidget {
               ),
             ),
             SizedBox(width: 20),
-            Text('Postinganku', style: AppStyle.heading1),
+            Flexible(
+              child: TextField(
+                controller: input,
+                onChanged: (value) => setState(() {}),
+                decoration: InputDecoration(
+                  label: Text('Ketik disini'),
+                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
+                ),
+              ),
+            )
           ],
         ),
       ),
       body: StreamBuilder<QuerySnapshot>(
-        stream: Article().get(AuthService().user.uid),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return ListView(
-              children: snapshot.data!.docs.map((DocumentSnapshot document) {
-                Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
+          stream: Article().search(input.text),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return ListView(
+                children: snapshot.data!.docs.map((DocumentSnapshot document) {
+                  Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
 
-                return Post(
-                    id: data['id'],
-                    user: data['user'],
-                    date: data['date'],
-                    picture: data['picture'],
-                    title: data['title'],
-                    desc: data['desc'],
-                    isDelete: true);
-              }).toList(),
-            );
-          } else {
-            return Center(child: CircularProgressIndicator());
-          }
-        },
-      ),
+                  return Post(
+                      id: data['id'],
+                      user: data['user'],
+                      date: data['date'],
+                      picture: data['picture'],
+                      title: data['title'],
+                      desc: data['desc']);
+                }).toList(),
+              );
+            } else {
+              return Center(child: CircularProgressIndicator());
+            }
+          }),
     );
   }
 }
