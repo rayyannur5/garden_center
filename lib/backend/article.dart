@@ -1,11 +1,8 @@
 import 'dart:io';
-import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:garden_center/backend/auth_service.dart';
-import 'package:garden_center/backend/user.dart';
 
 class Article {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -23,6 +20,16 @@ class Article {
 
   getAll() {
     return _firestore.collection('blog').orderBy('date', descending: true).snapshots();
+  }
+
+  Future getData() async {
+    // Get docs from collection reference
+    QuerySnapshot querySnapshot = await _firestore.collection('blog').get();
+
+    // Get data from docs and convert map to List
+    final allData = querySnapshot.docs.map((doc) => doc.data()).toList();
+
+    return allData;
   }
 
   create(title, desc, date, String path) async {
@@ -68,9 +75,10 @@ class Article {
   delete(id) async {
     DocumentSnapshot doc = await _firestore.collection('blog').doc(id).get();
     var data = doc.data() as Map;
-    print(data['pictureChild']);
-    Reference ref = FirebaseStorage.instance.ref().child(data['pictureChild']);
-    await ref.delete();
+    if (data['picture'] != "") {
+      Reference ref = FirebaseStorage.instance.ref().child(data['pictureChild']);
+      await ref.delete();
+    }
     await _firestore.collection('blog').doc(id).delete();
   }
 }

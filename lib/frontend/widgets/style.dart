@@ -10,7 +10,11 @@ class AppColor {
 }
 
 class AppStyle {
-  static TextStyle miniparagraph = const TextStyle(fontFamily: 'Poppins', color: Colors.black, fontSize: 10);
+  static TextStyle miniparagraph = const TextStyle(
+    fontFamily: 'Poppins',
+    color: Colors.black,
+    fontSize: 8,
+  );
   static TextStyle miniparagraphBold =
       const TextStyle(fontFamily: 'Poppins', color: Colors.black, fontSize: 10, fontWeight: FontWeight.w800);
   static TextStyle paragraph = const TextStyle(fontFamily: 'Poppins', color: Colors.black, fontSize: 12);
@@ -19,6 +23,7 @@ class AppStyle {
   static TextStyle paragraph2Light = const TextStyle(fontFamily: 'Poppins', color: Colors.white, fontSize: 16);
   static TextStyle heading1 =
       const TextStyle(fontFamily: 'Poppins', fontSize: 20, color: Colors.black, fontWeight: FontWeight.w800);
+  static TextStyle heading1thin = const TextStyle(fontFamily: 'Poppins', fontSize: 25, color: Colors.black);
   static TextStyle heading1grey =
       const TextStyle(fontFamily: 'Poppins', fontSize: 20, color: Colors.grey, fontWeight: FontWeight.w800);
   static TextStyle heading1Light =
@@ -29,4 +34,5 @@ class AppStyle {
   static TextStyle heading3Light =
       const TextStyle(fontFamily: 'Poppins', color: Colors.white, fontSize: 13, fontWeight: FontWeight.w900);
   static TextStyle heading2thin = const TextStyle(fontFamily: 'Poppins', fontSize: 15);
+  static TextStyle heading2 = const TextStyle(fontFamily: 'Poppins', fontSize: 15, fontWeight: FontWeight.w900);
 }

@@ -1,17 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:garden_center/backend/plant.dart';
+import 'package:garden_center/frontend/plant/menu_plant.dart';
+import 'package:garden_center/frontend/widgets/navigator.dart';
 import 'package:garden_center/frontend/widgets/style.dart';
 
 class InfoPlant extends StatelessWidget {
-  final String title;
-  final String desc;
-  final String img;
-  const InfoPlant({super.key, required this.title, required this.desc, required this.img});
+  final Map data;
+  const InfoPlant({super.key, required this.data});
 
   @override
   Widget build(BuildContext context) {
+    String tips = "";
+    for (var teks in data['tips']) {
+      tips = tips + teks + "\n";
+    }
+
     var size = MediaQuery.of(context).size;
     return Scaffold(
         backgroundColor: Colors.white,
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         floatingActionButton: Container(
           width: MediaQuery.of(context).size.width,
           margin: EdgeInsets.symmetric(horizontal: 33),
@@ -19,9 +26,11 @@ class InfoPlant extends StatelessWidget {
           child: Material(
             borderRadius: BorderRadius.circular(25),
             elevation: 10,
-            color: Colors.green,
+            color: AppColor.primary,
             child: InkWell(
-              onTap: null,
+              onTap: () {
+                Future.delayed(Duration(microseconds: 100), () => Plant().add(data).then((value) => Nav.pop(context)));
+              },
               child: Center(
                 child: Text(
                   "Tanam",
@@ -31,12 +40,12 @@ class InfoPlant extends StatelessWidget {
             ),
           ),
         ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         body: CustomScrollView(
           slivers: [
             SliverAppBar(
               collapsedHeight: 120,
               pinned: true,
+              backgroundColor: AppColor.primary,
               automaticallyImplyLeading: false,
               title: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -70,9 +79,9 @@ class InfoPlant extends StatelessWidget {
               expandedHeight: 250,
               flexibleSpace: FlexibleSpaceBar(
                 background: Hero(
-                  tag: title,
+                  tag: data['name'],
                   child: Image.network(
-                    img,
+                    data['picture'],
                     width: double.maxFinite,
                     fit: BoxFit.cover,
                   ),
@@ -84,7 +93,7 @@ class InfoPlant extends StatelessWidget {
                   width: MediaQuery.of(context).size.width,
                   padding: EdgeInsets.fromLTRB(33, 10, 0, 10),
                   child: Text(
-                    title,
+                    data['name'],
                     style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold, fontFamily: "Poppins"),
                   ),
                   decoration: BoxDecoration(color: Colors.white),
@@ -93,18 +102,9 @@ class InfoPlant extends StatelessWidget {
             ),
             SliverToBoxAdapter(
               child: Container(
-                padding: EdgeInsets.fromLTRB(33, 0, 33, 0),
-                child: Text(
-                  desc,
-                  style: TextStyle(fontFamily: "Poppins"),
-                ),
-              ),
-            ),
-            SliverToBoxAdapter(
-              child: Container(
                 padding: EdgeInsets.fromLTRB(33, 10, 33, 0),
                 child: Text(
-                  "Jagung (Zea mays ssp. mays) adalah salah satu tanaman pangan penghasil karbohidrat yang terpenting di dunia, selain gandum dan padi. Bagi penduduk Amerika Tengah dan Selatan, bulir jagung adalah pangan pokok, sebagaimana bagi sebagian penduduk Afrika dan beberapa daerah di Indonesia. Pada masa kini, jagung juga sudah menjadi komponen penting pakan ternak. Penggunaan lainnya adalah sebagai sumber minyak pangan dan bahan dasar tepung maizena. Berbagai produk turunan hasil jagung menjadi bahan baku berbagai produk industri farmasi, kosmetika, dan kimia.",
+                  data['desc'],
                   textAlign: TextAlign.justify,
                   style: AppStyle.paragraph,
                 ),
@@ -123,10 +123,7 @@ class InfoPlant extends StatelessWidget {
               child: Container(
                 padding: EdgeInsets.fromLTRB(33, 10, 33, 0),
                 child: Text(
-                  "1. Pilih Bibit Jagung yang Bagus\nCara menanam jagung yang terpenting adalah memilih bibitnya. Sebaiknya Moms memilih bibit jagung kualitas unggul atau merk terkenal jika Moms membelinya di kios pertanian.\n\n" +
-                      "2. Siapkan Tanah untuk Media Tanam\nUntuk menanam jagung dibutuhkan tanah yang gembur. Namun, pertama-tama, tanah harus bersih dari sisa tanaman lama atau rumput-rumputan.\n\n" +
-                      "3. Menanam Bibit Jagung\nTaburkan benih jagung sedalam 3 hingga 5 cm, setiap lubang bisa dimasukan 2-3 biji jagung. Apabila jenis jagung besar ditanam dan tidak diselingi dengan tanaman lain, maka jarak yang baik yaitu antara 90 x 60 cm.\n\n" +
-                      "4. Waktu Penyiraman\nSirami jagung dua hingga tiga kali seminggu, atau ketika 3 cm bagian atas tanah mulai mengering. Berikan jagung dengan air sampai membasahi sekitar 5 cm permukaan tanahnya setiap minggu.\n\n\n\n",
+                  tips,
                   textAlign: TextAlign.justify,
                   style: TextStyle(fontFamily: "Poppins"),
                 ),

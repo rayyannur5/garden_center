@@ -18,7 +18,14 @@ class Menu extends StatefulWidget {
 class _MenuState extends State<Menu> {
   int _index = 0;
   PageController pageController = PageController(initialPage: 0);
-  List<Widget> _page = [HomePage(), PlantPage(), ArticlePage(), ProfilePage()];
+  List<Widget> _page = [
+    HomePage(),
+    PlantPage(),
+    ArticlePage(
+      key: Key('tes'),
+    ),
+    ProfilePage()
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -27,9 +34,8 @@ class _MenuState extends State<Menu> {
         controller: pageController,
         onPageChanged: (index) {
           Statusbarz.instance.refresh();
-          setState(() {
-            _index = index;
-          });
+          _index = index;
+          setState(() {});
         },
         children: _page,
       ),

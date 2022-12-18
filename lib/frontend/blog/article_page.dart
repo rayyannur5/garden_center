@@ -31,7 +31,7 @@ class ArticlePage extends StatelessWidget {
 
     return Scaffold(
       extendBodyBehindAppBar: true,
-      backgroundColor: Colors.transparent,
+      backgroundColor: Colors.white,
       floatingActionButton: FloatingActionButton(
         backgroundColor: AppColor.primary,
         onPressed: () {

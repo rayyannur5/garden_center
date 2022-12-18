@@ -19,6 +19,7 @@ class PagePost extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: StreamBuilder<dynamic>(
           stream: User().getUser(user),
           builder: (context, snapshot) {
@@ -55,13 +56,23 @@ class PagePost extends StatelessWidget {
                 Hero(
                   tag: title,
                   child: picture != ""
-                      ? Container(
-                          margin: EdgeInsets.fromLTRB(20, 5, 20, 20),
-                          height: 300,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: Colors.grey,
-                              image: DecorationImage(image: NetworkImage(picture), fit: BoxFit.cover)),
+                      ? GestureDetector(
+                          onTap: () {
+                            showDialog(
+                              context: context,
+                              builder: (context) => Dialog(
+                                child: Image.network(picture),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            margin: EdgeInsets.fromLTRB(20, 5, 20, 20),
+                            height: 300,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Colors.grey,
+                                image: DecorationImage(image: NetworkImage(picture), fit: BoxFit.cover)),
+                          ),
                         )
                       : SizedBox(),
                 ),

@@ -48,6 +48,9 @@ dependencies:
   image_picker: ^0.8.6
   firebase_storage: ^10.3.11
   path: ^1.8.2
+  xml2json: ^5.3.5
+  http: ^0.13.5
+  dynamic_weather_icons: ^1.2.0
 
 dev_dependencies:
   flutter_test:

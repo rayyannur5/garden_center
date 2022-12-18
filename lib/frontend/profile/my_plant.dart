@@ -1,6 +1,9 @@
 import 'dart:ui';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:garden_center/backend/plant.dart';
+import 'package:garden_center/frontend/plant/menu_plant.dart';
 import 'package:garden_center/frontend/widgets/navigator.dart';
 import 'package:garden_center/frontend/widgets/style.dart';
 
@@ -19,7 +22,6 @@ class _MyPlantState extends State<MyPlant> {
       Duration(milliseconds: 100),
       () {
         setState(() {
-          print('masuk sini');
           start = true;
         });
       },
@@ -29,6 +31,16 @@ class _MyPlantState extends State<MyPlant> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
+    Map datagambar = {
+      'Cabai': 'assets/img/cabai.png',
+      'Tomat': 'assets/img/tomat.png',
+      'Bayam Hijau': 'assets/img/bayamhijau.png',
+      'Bawang Putih': 'assets/img/bawangputih.png',
+      'Bawang Merah': 'assets/img/bawangmerah.png',
+      'Kangkung': 'assets/img/kangkung.png',
+      'Kentang': 'assets/img/kentang.png',
+      'Wortel': 'assets/img/wortel.png',
+    };
     return Scaffold(
       backgroundColor: Colors.white,
       extendBodyBehindAppBar: true,
@@ -66,25 +78,35 @@ class _MyPlantState extends State<MyPlant> {
           ],
         ),
       ),
-      body: ListView(
-        children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-            child: Text('Sedang Ditanam', style: AppStyle.heading3),
-          ),
-          cardTanaman(size, 'assets/img/jagung.png', 'jagung', 'Umur panen 3 bulan', 50),
-          cardTanaman(size, 'assets/img/sawi.png', 'Sawi', 'Umur panen 1 bulan', 60),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-            child: Text('Selesai', style: AppStyle.heading3),
-          ),
-          cardTanaman(size, 'assets/img/tomat.png', 'Tomat', 'Umur panen 1 bulan', 100),
-        ],
-      ),
+      body: StreamBuilder<QuerySnapshot>(
+          stream: Plant().getMyPlant(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              // print(snapshot.data);
+              return ListView(
+                children: snapshot.data!.docs.map((DocumentSnapshot document) {
+                  Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
+                  print('ts');
+                  print(data);
+                  return FutureBuilder<dynamic>(
+                      future: Plant().getPlant(data['plant']),
+                      builder: (context, snapshot) {
+                        if (!snapshot.hasData) {
+                          return Center(child: CircularProgressIndicator());
+                        } else
+                          return cardTanaman(data['id'], size, datagambar[snapshot.data['name']], snapshot.data['name'],
+                              snapshot.data['latin'], data['progress']);
+                      });
+                }).toList(),
+              );
+            } else {
+              return Center(child: CircularProgressIndicator());
+            }
+          }),
     );
   }
 
-  Widget cardTanaman(var size, var image, var title, var desc, var progress) {
+  Widget cardTanaman(var id, var size, var image, var title, var desc, double progress) {
     return Container(
       height: 120,
       margin: EdgeInsets.symmetric(horizontal: 20),
@@ -106,7 +128,6 @@ class _MyPlantState extends State<MyPlant> {
             child: AnimatedContainer(
               duration: Duration(milliseconds: 500),
               onEnd: () {
-                print('msuk finish');
                 finish = true;
                 setState(() {});
               },
@@ -125,16 +146,19 @@ class _MyPlantState extends State<MyPlant> {
             children: [
               Row(
                 children: [
-                  Image.asset(
-                    image,
+                  SizedBox(
+                    width: 170,
+                    child: Image.asset(
+                      image,
+                    ),
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       SizedBox(height: 20),
-                      Text(title, style: AppStyle.heading1),
-                      Text('$desc\nProgress $progress%', style: AppStyle.miniparagraph),
+                      Text(title, style: AppStyle.heading2),
+                      Text('$desc\nProgress ' + progress.toStringAsFixed(2) + '%', style: AppStyle.miniparagraph),
                     ],
                   ),
                 ],
@@ -159,7 +183,16 @@ class _MyPlantState extends State<MyPlant> {
               color: Colors.transparent,
               child: InkWell(
                 borderRadius: BorderRadius.circular(25),
-                onTap: () {},
+                onTap: () {
+                  Future.delayed(
+                      Duration(milliseconds: 150),
+                      () => Nav.push(
+                          context,
+                          MenuPlant(
+                            id: id,
+                            name: title,
+                          )));
+                },
               ),
             ),
           )

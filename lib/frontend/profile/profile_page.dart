@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:garden_center/frontend/profile/edit_profile.dart';
 import 'package:garden_center/frontend/profile/my_plant.dart';
 import 'package:garden_center/frontend/profile/my_post.dart';
 import 'package:garden_center/frontend/profile/setting.dart';
@@ -18,6 +19,7 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text('Profile'),
         titleTextStyle: AppStyle.paragraph2Light,
@@ -100,7 +102,7 @@ class ProfilePage extends StatelessWidget {
                 menu(CustomIcons.leaf, 'Tanaman', () => Nav.push(context, MyPlant())),
                 menu(CustomIcons.blog, 'Postingan', () => Nav.push(context, MyPost())),
                 menu(CustomIcons.settings, 'Pengaturan', () => Nav.push(context, Setting())),
-                menu(CustomIcons.user_edit, 'Ubah Profil', () {}),
+                menu(CustomIcons.user_edit, 'Ubah Profil', () => Nav.push(context, EditProfile())),
                 const SizedBox(height: 20),
                 Row(
                   children: [

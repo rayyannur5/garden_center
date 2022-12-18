@@ -28,12 +28,11 @@ class AuthService {
 
   Future signInWithGoogle() async {
     // Trigger the authentication flow
-    final GoogleSignInAccount? googleUser =
-        await GoogleSignIn(scopes: <String>["email"]).signIn();
+
+    final GoogleSignInAccount? googleUser = await GoogleSignIn(scopes: <String>["email"]).signIn();
 
     // Obtain the auth details from the request
-    final GoogleSignInAuthentication googleAuth =
-        await googleUser!.authentication;
+    final GoogleSignInAuthentication googleAuth = await googleUser!.authentication;
 
     // Create a new credential
     final credential = GoogleAuthProvider.credential(
@@ -41,8 +40,7 @@ class AuthService {
       idToken: googleAuth.idToken,
     );
 
-    UserCredential userCredential =
-        await _auth.signInWithCredential(credential);
+    UserCredential userCredential = await _auth.signInWithCredential(credential);
 
     User? user = userCredential.user;
 
